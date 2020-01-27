@@ -7,6 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
     defaultConfig {
         applicationId "com.mohamedhefny.eurconverter"
         minSdkVersion 19
@@ -15,9 +16,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"http://data.fixer.io/api/\"")
+            buildConfigField("String", "API_KEY", "\"c70f3bc58808fcacba5aed062542f81f\"")
+        }
         release {
             minifyEnabled false
+            buildConfigField("String", "BASE_URL", "\"http://data.fixer.io/api/\"")
+            buildConfigField("String", "API_KEY", "\"c70f3bc58808fcacba5aed062542f81f\"")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
