@@ -13,9 +13,7 @@ import com.mohamedhefny.eurconverter.R
 import com.mohamedhefny.eurconverter.data.MainViewModel
 import com.mohamedhefny.eurconverter.data.models.Currency
 import com.mohamedhefny.eurconverter.ui.converter.ConverterActivity
-import com.mohamedhefny.eurconverter.utils.CURRENCY_BUNDLE
-import com.mohamedhefny.eurconverter.utils.CURRENCY_NAME_EXTRA
-import com.mohamedhefny.eurconverter.utils.CURRENCY_RATE_EXTRA
+import com.mohamedhefny.eurconverter.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
@@ -26,6 +24,11 @@ class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (!isNetworkAvailable()) {
+            showLongToast(R.string.no_internet)
+            return
+        }
 
         World.init(applicationContext)
 
