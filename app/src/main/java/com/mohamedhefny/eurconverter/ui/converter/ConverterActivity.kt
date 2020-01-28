@@ -35,4 +35,9 @@ class ConverterActivity : AppCompatActivity() {
         currencyRate = bundle.getFloat(CURRENCY_RATE_EXTRA)
         selected_currency_rate.text = String.format("%.2f", currencyRate)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.activty_main_enter, R.anim.activty_converter_exit)
+    }
 }

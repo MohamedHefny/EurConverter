@@ -44,9 +44,12 @@ class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
             putString(CURRENCY_NAME_EXTRA, currency.name)
             putFloat(CURRENCY_RATE_EXTRA, currency.rate)
         }
+
         Intent(this, ConverterActivity::class.java).apply {
             putExtra(CURRENCY_BUNDLE, currencyData)
             startActivity(this)
         }
+
+        overridePendingTransition(R.anim.activty_converter_enter, R.anim.activty_main_exit)
     }
 }
