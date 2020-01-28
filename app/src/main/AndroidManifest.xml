@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MainActivity">
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.converter.ConverterActivity"/>
+        <activity
+            android:name=".ui.converter.ConverterActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

@@ -30,10 +30,20 @@ class ConverterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Get currency data from the coming bundle to bind it in the ui.
+     * @param bundle from coming intent or saveInstanceState.
+     */
     private fun extractData(bundle: Bundle) {
-        selected_currency_name.text = bundle.getString(CURRENCY_NAME_EXTRA)!!
         currencyRate = bundle.getFloat(CURRENCY_RATE_EXTRA)
         selected_currency_rate.text = String.format("%.2f", currencyRate)
+        selected_currency_name.text = bundle.getString(CURRENCY_NAME_EXTRA)!!
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putFloat(CURRENCY_RATE_EXTRA, currencyRate)
+        outState.putString(CURRENCY_NAME_EXTRA, selected_currency_name.text.toString())
     }
 
     override fun onBackPressed() {
