@@ -1,5 +1,6 @@
 package com.mohamedhefny.eurconverter.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -10,6 +11,10 @@ import com.blongho.country_data.World
 import com.mohamedhefny.eurconverter.R
 import com.mohamedhefny.eurconverter.data.MainViewModel
 import com.mohamedhefny.eurconverter.data.models.Currency
+import com.mohamedhefny.eurconverter.ui.converter.ConverterActivity
+import com.mohamedhefny.eurconverter.utils.CURRENCY_BUNDLE
+import com.mohamedhefny.eurconverter.utils.CURRENCY_NAME_EXTRA
+import com.mohamedhefny.eurconverter.utils.CURRENCY_RATE_EXTRA
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
@@ -35,6 +40,13 @@ class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
     }
 
     override fun onCurrencyClicked(currency: Currency) {
-
+        val currencyData: Bundle = Bundle().apply {
+            putString(CURRENCY_NAME_EXTRA, currency.name)
+            putFloat(CURRENCY_RATE_EXTRA, currency.rate)
+        }
+        Intent(this, ConverterActivity::class.java).apply {
+            putExtra(CURRENCY_BUNDLE, currencyData)
+            startActivity(this)
+        }
     }
 }
