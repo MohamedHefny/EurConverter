@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blongho.country_data.World
 import com.google.gson.JsonObject
 import com.mohamedhefny.eurconverter.data.models.Currency
 import com.mohamedhefny.eurconverter.data.models.CurrencyRatesResponse
@@ -43,9 +44,17 @@ class MainViewModel : ViewModel() {
         val currenciesList: MutableList<Currency> = mutableListOf()
 
         currenciesObject.entrySet().iterator().forEach {
-            currenciesList.add(Currency(-1, it.key, it.value.asFloat))
+            currenciesList.add(Currency(getCurrencyFlag(it.key), it.key, it.value.asFloat))
         }
 
         return currenciesList
     }
+
+    /**
+     * @param currencyIsoCode is a ISO 4217 code for the currency
+     * @return the corresponding currency flag.
+     * TODO: This method should be related to useCase class to improve maintainability and testing.
+     */
+    private fun getCurrencyFlag(currencyIsoCode: String) =
+        World.getFlagOf(currencyIsoCode.substring(0, 2))
 }

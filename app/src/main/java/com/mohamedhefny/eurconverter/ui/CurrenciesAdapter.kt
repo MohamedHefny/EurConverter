@@ -26,13 +26,14 @@ class CurrenciesAdapter(private val currencies: List<Currency>) :
     override fun getItemCount(): Int = currencies.size
 
     class CurrencyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val currncyImage: ImageView = itemView.item_currency_img
+        private val currencyImage: ImageView = itemView.item_currency_img
         private val currencyName: TextView = itemView.item_currency_name
         private val currencyRate: TextView = itemView.item_currency_rate
 
         fun bindCurrencyData(currency: Currency) {
             currencyName.text = currency.name
             currencyRate.text = String.format("%.2f", currency.rate)
+            currencyImage.setImageResource(currency.image)
         }
     }
 }

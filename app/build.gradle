@@ -56,6 +56,8 @@ dependencies {
     //network api logger
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.2'
 
+    implementation 'com.github.blongho:worldCountryData:1.4-beta01'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
