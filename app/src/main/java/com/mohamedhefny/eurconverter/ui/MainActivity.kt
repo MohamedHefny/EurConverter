@@ -2,6 +2,7 @@ package com.mohamedhefny.eurconverter.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -28,15 +29,16 @@ class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
 
         World.init(applicationContext)
 
-        mainVieModel.getEurRates()
-            .observe(this, Observer {
-                currencies_recycler.apply {
-                    addItemDecoration(
-                        DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
-                    )
-                    adapter = CurrenciesAdapter(it, this@MainActivity)
-                }
-            })
+        //Observe currencies rate and update ui when rates are available.
+        mainVieModel.getEurRates().observe(this, Observer {
+            main_loading.visibility = View.GONE
+            currencies_recycler.apply {
+                addItemDecoration(
+                    DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
+                )
+                adapter = CurrenciesAdapter(it, this@MainActivity)
+            }
+        })
     }
 
     override fun onCurrencyClicked(currency: Currency) {
