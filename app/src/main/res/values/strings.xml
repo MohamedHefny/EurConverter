@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EURConverter</string>
+    <string name="eur">EUR</string>
 </resources>
