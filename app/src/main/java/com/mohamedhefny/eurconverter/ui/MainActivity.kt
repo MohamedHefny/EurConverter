@@ -1,14 +1,14 @@
-package com.mohamedhefny.eurconverter
+package com.mohamedhefny.eurconverter.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import com.mohamedhefny.eurconverter.R
 import com.mohamedhefny.eurconverter.data.MainViewModel
-import com.mohamedhefny.eurconverter.data.remote.ApiClient
-import com.mohamedhefny.eurconverter.data.remote.ApiServices
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         mainVieModel.getEurRates()
             .observe(this, Observer {
-                if (it != null)
-                    Log.d("MainActivity", it.currenciesRates.toString())
+                currencies_recycler.apply {
+                    addItemDecoration(
+                        DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
+                    )
+                    adapter = CurrenciesAdapter(it)
+                }
             })
     }
 }
