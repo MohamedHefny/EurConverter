@@ -10,8 +10,10 @@ import com.mohamedhefny.eurconverter.R
 import com.mohamedhefny.eurconverter.data.models.Currency
 import kotlinx.android.synthetic.main.item_currency.view.*
 
-class CurrenciesAdapter(private val currencies: List<Currency>) :
-    RecyclerView.Adapter<CurrenciesAdapter.CurrencyViewHolder>() {
+class CurrenciesAdapter(
+    private val currencies: List<Currency>,
+    private val currencyCallback: CurrencyCallback
+) : RecyclerView.Adapter<CurrenciesAdapter.CurrencyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         val currencyView: View = LayoutInflater.from(parent.context)
@@ -21,6 +23,9 @@ class CurrenciesAdapter(private val currencies: List<Currency>) :
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         holder.bindCurrencyData(currencies[position])
+        holder.itemView.setOnClickListener {
+            currencyCallback.onCurrencyClicked(currencies[position])
+        }
     }
 
     override fun getItemCount(): Int = currencies.size
@@ -35,5 +40,9 @@ class CurrenciesAdapter(private val currencies: List<Currency>) :
             currencyRate.text = String.format("%.2f", currency.rate)
             currencyImage.setImageResource(currency.image)
         }
+    }
+
+    interface CurrencyCallback {
+        fun onCurrencyClicked(currency: Currency)
     }
 }

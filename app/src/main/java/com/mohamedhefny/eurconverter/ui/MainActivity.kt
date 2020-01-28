@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blongho.country_data.World
 import com.mohamedhefny.eurconverter.R
 import com.mohamedhefny.eurconverter.data.MainViewModel
+import com.mohamedhefny.eurconverter.data.models.Currency
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CurrenciesAdapter.CurrencyCallback {
 
     private val mainVieModel by
     lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
@@ -28,8 +29,12 @@ class MainActivity : AppCompatActivity() {
                     addItemDecoration(
                         DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
                     )
-                    adapter = CurrenciesAdapter(it)
+                    adapter = CurrenciesAdapter(it, this@MainActivity)
                 }
             })
+    }
+
+    override fun onCurrencyClicked(currency: Currency) {
+
     }
 }
